@@ -7,16 +7,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sudoku';
+  obj={
+    value: 0,
+    isEditable: true
+  }
 
-  sudoku = [[0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0]]
+  sudoku = [[this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj],
+            [this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj,this.obj]]
 
   solve() {
     console.log(this.sudoku)

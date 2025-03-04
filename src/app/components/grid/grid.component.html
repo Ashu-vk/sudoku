@@ -1,7 +1,9 @@
 <div *ngIf="gridIndex && grid" class="box3">
   <ng-container *ngFor="let i of [0,1,2]">
     <ng-container *ngFor="let j of [0,1,2]">
-      <app-input-div [(value)]="grid[gridIndex[0]+i][gridIndex[1]+j]" (valueChange)="validate()"></app-input-div>
+      <app-input-div [(value)]="grid[gridIndex[0]+i][gridIndex[1]+j]"
+                     (valueChange)="validate(gridIndex[0]+i, gridIndex[1]+j, grid[gridIndex[0]+i][gridIndex[1]+j])">
+      </app-input-div>
     </ng-container>
   </ng-container>
 </div>

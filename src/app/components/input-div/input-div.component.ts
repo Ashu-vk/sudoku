@@ -12,7 +12,7 @@ export class InputDivComponent implements OnInit {
     this.val=v;
   };
 
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange: EventEmitter<number> = new EventEmitter();
 
   constructor() { }
 
@@ -32,6 +32,5 @@ export class InputDivComponent implements OnInit {
       this.valueChange.emit(this.val);
     }
     event.preventDefault()
-    console.log(this.val)
   }
 }
