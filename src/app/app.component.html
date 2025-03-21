@@ -3,11 +3,12 @@
   <ng-container  *ngFor="let i of [0,3,6]">
   <div class="box">
     <ng-container  *ngFor="let j of [0,3,6]">
-      <app-grid [grid]="sudoku" [gridIndex]="[i,j]"></app-grid>
+      <app-grid [grid]="sudoku" [gridIndex]="[j,i]"></app-grid>
     </ng-container>
   </div>
   </ng-container>
 </div>
 
-<button (click)="solve()">solve</button>
+<button (click)="solve()">Solve</button>
+<!--<button (click)="createProblem()">Create Problem</button>-->
 <router-outlet></router-outlet>

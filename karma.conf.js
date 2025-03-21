@@ -33,11 +33,17 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    port: 9876,
+    port: 4201,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+    customLaunchers: {
+      ChromeCustom: {
+        base: 'Chrome',
+        executablePath: process.env.CHROME_BIN
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });
