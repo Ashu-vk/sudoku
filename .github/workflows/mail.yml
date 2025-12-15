@@ -5,7 +5,7 @@ on:
 jobs:
   greet:
     runs-on: ubuntu-latest
-    environment: env
+    environment: work-flow-env
     steps:
       - name: Send greeting mail
         uses: dawidd6/action-send-mail@v3
@@ -16,7 +16,7 @@ jobs:
           password: ${{secrets.GMAIL }}
           subject: "Greeting for visit"
           to: ${{inputs.MAIL_TO}}
-          from: ${{secrets.mail_user}}
+          from: ${{ inputs.GMAIL_USER }}
           content_type: text/plain
           body: 
             Hello ${{inputs.name}}
