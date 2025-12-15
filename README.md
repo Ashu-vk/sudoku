@@ -1,27 +1,59 @@
-# Sudoku
+# 🧩 Sudoku Game & Solver  
+**Angular | Algorithms | Problem Solving**
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+A web-based **Sudoku game and solver** built using **Angular 14.2.3**.  
+This project allows users to **create and solve Sudoku puzzles** using a **custom backtracking algorithm implemented from scratch**, without relying on any external Sudoku-solving libraries.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## ✨ Features
 
-## Code scaffolding
+- 🎮 Play Sudoku in the browser
+- ✏️ Create custom Sudoku puzzles
+- 🧠 Solve Sudoku using a custom backtracking algorithm
+- 🚫 No third-party Sudoku solver libraries used
+- ✅ Validates all Sudoku rules
+- 🧪 Unit tests included
+- ⚡ Built with Angular 14
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🛠️ Tech Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Frontend:** Angular 14.2.3
+- **Language:** TypeScript
+- **Algorithm:** Backtracking (custom implementation)
+- **Testing:** Karma / Jasmine
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🧠 Sudoku Solver Algorithm
 
-## Running end-to-end tests
+The solver uses a **recursive backtracking algorithm**:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Identify an empty cell in the grid
+2. Try numbers from **1 to 9**
+3. Validate the number against:
+   - Row constraints
+   - Column constraints
+   - 3×3 sub-grid constraints
+4. Recursively continue if valid
+5. Backtrack when conflicts occur
 
-## Further help
+This guarantees a correct solution when one exists.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## 📦 Installation
+
+### Prerequisites
+
+- Node.js (v14+)
+- npm
+
+### Steps
+
+```bash
+git clone https://github.com/Ashu-vk/sudoku.git
+cd sudoku
+npm install
