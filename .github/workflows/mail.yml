@@ -1,7 +1,14 @@
 name: greet-email
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Name of the person to greet"
+        required: true
+      mail_to:
+        description: "Recipient email address"
+        required: true
 jobs:
   greet:
     runs-on: ubuntu-latest
@@ -12,13 +19,12 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587
-          username: ${{ inputs.GMAIL_USER }}
+          username: ${{ env.GMAIL_USER }}
           password: ${{secrets.GMAIL }}
           subject: "Greeting for visit"
-          to: ${{inputs.MAIL_TO}}
-          from: ${{ inputs.GMAIL_USER }}
-          content_type: text/plain
-          body: 
-            Hello ${{inputs.name}}
+          to: ${{env.MAIL_TO}}
+          from: ${{ env.GMAIL_USER }}
+          body: |
+            Hello ${{env.name}}
 
             This is greeting from my github
