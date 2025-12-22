@@ -22,7 +22,7 @@ export class InputDivComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setValu(event: KeyboardEvent) {
+  setValue(event: KeyboardEvent) {
    if(this.val && this.val.isEditable) {
      if(event.altKey||event.ctrlKey||event.shiftKey||event.metaKey){
      }
@@ -38,8 +38,4 @@ export class InputDivComponent implements OnInit {
      event.preventDefault();
    }
   }
-  // setValu($event: any) {
-  //   console.log($event)
-  //
-  // }
 }

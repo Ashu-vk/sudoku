@@ -27,14 +27,14 @@ describe('InputDivComponent', () => {
   it('should setValue 2 by keyboard', () => {
     component.val = new BoxObject(0, true);
     const keyboardEvent = new KeyboardEvent("keydown", {code: "Digit2", key: "2"});
-    component.setValu(keyboardEvent);
+    component.setValue(keyboardEvent);
     expect(component.val.value).toEqual(2);
     expect(component.val.isEditable).toBeTruthy();
   });
   it('should click backspace', () => {
     component.val = new BoxObject(5, true);
     const keyboardEvent = new KeyboardEvent("keydown", {code: "Backspace"});
-    component.setValu(keyboardEvent);
+    component.setValue(keyboardEvent);
     expect(component.val.value).toBeUndefined();
     expect(component.val.isEditable).toBeTruthy();
   });

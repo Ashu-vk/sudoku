@@ -5,8 +5,10 @@ import {BoxObject} from "./domain/box-object";
 import {UtilService} from "./services/util.service";
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  let utilService: jasmine.SpyObj<UtilService>;
+  beforeEach( () => {
+    const spy = jasmine.createSpyObj('UtilService', ['isValid']);
+     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
@@ -14,9 +16,10 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        UtilService
+        {provide: UtilService, useValue: spy}
       ]
     }).compileComponents();
+    utilService = TestBed.inject(UtilService) as jasmine.SpyObj<UtilService>;
   });
 
   const sudoku = [
@@ -77,4 +80,22 @@ describe('AppComponent', () => {
     expect(app.sudoku).toEqual(sudoku);
   })
 
+  it('should solve a valid Sudoku grid', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.sudoku = [
+      [new BoxObject(5, true), new BoxObject(3, true), new BoxObject(0, true)],
+      [new BoxObject(6, true), new BoxObject(0, true), new BoxObject(0, true)],
+      [new BoxObject(0, true), new BoxObject(9, true), new BoxObject(8, true)],
+    ];
+
+    utilService.isValid.and.callFake((sudoku, row, col, num) => true); // Mock isValid logic
+
+    const result = await app.solveProblem(0, 0);
+    // ✅ Ensure rowIndex and colIndex are valid
+    expect(async () => {
+      await app.solveProblem(0, 0);
+    }).not.toThrow();
+    expect(result).toBeTrue();
+  });
 });

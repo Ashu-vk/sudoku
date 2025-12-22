@@ -1,8 +1,9 @@
 .box3 {
   display: grid;
+  column-gap: 0;
   grid-template-columns: auto auto auto;
   border: 1px solid black;
 }
 app-input-div {
-  width: 45px;
+  width: 80px;
 }

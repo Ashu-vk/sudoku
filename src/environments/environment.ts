@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  boxSize: 9
+  gridSize: 9,
+  boxSize: 3
 };
 
 /*
