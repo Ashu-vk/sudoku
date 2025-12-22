@@ -290,6 +290,15 @@
 /*    visibility: hidden;*/
 /*  }*/
 /*}*/
+
+
+@media screen and (max-width: 725px) {
+  #sudoku {
+    width: 100%
+  }
+}
+
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -299,8 +308,10 @@
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
+  column-gap: 0;
   border: 1px solid black;
-  width: 50%;
+  width: 725px;
+  height: 725px;
 }
 .box {
   display: grid;

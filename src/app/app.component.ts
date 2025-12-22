@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { BoxObject } from './domain/box-object';
+import {Component} from '@angular/core';
+import {BoxObject} from './domain/box-object';
 import {environment} from "../environments/environment";
 import {UtilService} from "./services/util.service";
 
@@ -10,6 +10,7 @@ import {UtilService} from "./services/util.service";
 })
 export class AppComponent {
   title = 'sudoku';
+
   constructor(private utilService: UtilService) {
   }
 
@@ -24,7 +25,7 @@ export class AppComponent {
   //           [new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true)],
   //           [new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true)]]
 
-   sudoku = [
+  sudoku = [
     [new BoxObject(5, true), new BoxObject(3, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true)],
     [new BoxObject(6, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(1, true), new BoxObject(9, true), new BoxObject(5, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true)],
     [new BoxObject(0, true), new BoxObject(9, true), new BoxObject(8, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(6, true), new BoxObject(0, true)],
@@ -38,71 +39,43 @@ export class AppComponent {
 
 
   solve() {
-    this.solveProblem(0, 0).then(a=>console.log(a))
+    return this.solveProblem(0, 0).then(a => a);
   }
 
   createProblem() {
-    this.sudoku.map(i=> i.map(j=> {
-      if(j.value){
-        j.isEditable=false;
+    this.sudoku.map(i => i.map(j => {
+      if (j.value) {
+        j.isEditable = false;
       }
     }));
   }
 
   public async solveProblem(rowIndex: number, colIndex: number): Promise<boolean> {
-    if (colIndex == 9) {
+    if (colIndex == environment.gridSize) {
       rowIndex++;
-      if (rowIndex == 9) {
+      if (rowIndex == environment.gridSize) {
         return true;
       }
-      colIndex =0;
+      colIndex = 0;
     } else {
     }
-
-    if (this.sudoku[rowIndex][colIndex].value !== 0) {
-      return this.solveProblem(rowIndex , colIndex+1);
-    }
-
-    for (let num = 1; num < 10; num++) {
+   if(this.sudoku) {
+     if (this.sudoku[rowIndex][colIndex]?.value !== 0) {
+       return this.solveProblem(rowIndex, colIndex + 1);
+     }
+   }
+    for (let num = 1; num <= environment.gridSize; num++) {
       if (this.utilService.isValid(this.sudoku, rowIndex, colIndex, num)) {
-
         this.sudoku[rowIndex][colIndex] = new BoxObject(num, true);
-        await new Promise(resolve => setTimeout(resolve, 100));
-
+        await new Promise(resolve => setTimeout(resolve, 1000));
         if (await this.solveProblem(rowIndex, colIndex + 1)) {
           return true;
         }
-
         this.sudoku[rowIndex][colIndex] = new BoxObject(0, true);
-
       }
     }
     return false;
   }
 
-  // private solveProblem(rowIndex: number, colIndex: number): boolean {
-  //   if(rowIndex==environment.boxSize ) {
-  //     colIndex++;
-  //     if(colIndex==environment.boxSize) {
-  //       return true;
-  //     } else {
-  //       rowIndex=0;
-  //     }
-  //   }
-  //
-  //   if(this.sudoku[rowIndex][colIndex].value!=0) {
-  //     return this.solveProblem(rowIndex+1, colIndex);
-  //   }
-  //
-  //   for (let num=1; num<10;num++) {
-  //     if(this.utilService.isValid(this.sudoku, rowIndex, colIndex, num)) {
-  //       this.sudoku[rowIndex][colIndex].value=num;
-  //       if(this.solveProblem(rowIndex+1, colIndex)) {
-  //         return true;
-  //       }
-  //       this.sudoku[rowIndex][colIndex].value =0;
-  //     }
-  //   }
-  //   return false;
-  // }
+
 }
