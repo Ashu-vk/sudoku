@@ -11,7 +11,7 @@ export class InputDivComponent implements OnInit {
   val!:  BoxObject ;
   @Input() set value(v: BoxObject){
     if (v) {
-      this.val = v;
+      this.val = v;      
     }
   };
 

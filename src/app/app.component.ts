@@ -26,15 +26,15 @@ export class AppComponent {
   //           [new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true),new BoxObject(0, true)]]
 
   sudoku = [
-    [new BoxObject(5, true), new BoxObject(3, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true)],
-    [new BoxObject(6, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(1, true), new BoxObject(9, true), new BoxObject(5, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true)],
-    [new BoxObject(0, true), new BoxObject(9, true), new BoxObject(8, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(6, true), new BoxObject(0, true)],
-    [new BoxObject(8, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(3, true)],
-    [new BoxObject(4, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(8, true), new BoxObject(0, true), new BoxObject(3, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(1, true)],
-    [new BoxObject(7, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(2, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(6, true)],
-    [new BoxObject(0, true), new BoxObject(6, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(2, true), new BoxObject(8, true), new BoxObject(0, true)],
-    [new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(4, true), new BoxObject(1, true), new BoxObject(9, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(5, true)],
-    [new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(8, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, true), new BoxObject(9, true)]
+    [new BoxObject(5, false), new BoxObject(3, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true)],
+    [new BoxObject(6, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(1, false), new BoxObject(9, false), new BoxObject(5, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true)],
+    [new BoxObject(0, true), new BoxObject(9, false), new BoxObject(8, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(6, false), new BoxObject(0, true)],
+    [new BoxObject(8, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(3, false)],
+    [new BoxObject(4, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(8, false), new BoxObject(0, true), new BoxObject(3, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(1, false)],
+    [new BoxObject(7, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(2, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(6, false)],
+    [new BoxObject(0, true), new BoxObject(6, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(2, false), new BoxObject(8, false), new BoxObject(0, true)],
+    [new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(4, false), new BoxObject(1, false), new BoxObject(9, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(5, false)],
+    [new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(8, false), new BoxObject(0, true), new BoxObject(0, true), new BoxObject(7, false), new BoxObject(9, false)]
   ];
 
 
@@ -48,6 +48,19 @@ export class AppComponent {
         j.isEditable = false;
       }
     }));
+  }
+  reset() {
+    // Create distinct BoxObject instances for every cell so they are not shared
+    // (previous implementation used Array.fill which reused the same instance
+    // across multiple cells/rows and caused updates to propagate everywhere)
+    for (let r = 0; r < environment.gridSize; r++) {
+      if (!this.sudoku[r]) {
+        this.sudoku[r] = [];
+      }
+      for (let c = 0; c < environment.gridSize; c++) {
+        this.sudoku[r][c] = new BoxObject(0, true);
+      }
+    }
   }
 
   public async solveProblem(rowIndex: number, colIndex: number): Promise<boolean> {
