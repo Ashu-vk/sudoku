@@ -1,0 +1,28 @@
+name: greet-email
+
+on:
+  workflow_dispatch:
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    environment: work-flow-env
+    env:
+      GMAIL_USER: ${{ vars.GMAIL_USER }}
+      MAIL_TO: ${{ vars.MAIL_TO }}
+      NAME: ${{ vars.NAME }}
+    steps:
+      - name: Send greeting mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ env.GMAIL_USER }}
+          password: ${{secrets.GMAIL }}
+          subject: "Greeting for visit"
+          to: ${{env.MAIL_TO}}
+          from: ${{ env.GMAIL_USER }}
+          body: |
+            Hello ${{env.NAME}}
+
+            This is greeting from my github

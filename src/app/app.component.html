@@ -7,8 +7,15 @@
     </ng-container>
   </div>
   </ng-container>
+ 
 </div>
+ <div class="controls">
+    <button class="solve-btn" (click)="solve()">Solve</button>
+    <button class="solve-btn" (click)="createProblem()">Create Problem</button>
+    <button class="solve-btn" (click)="reset()">Reset</button>
+  </div>
 
-<button (click)="solve()">Solve</button>
+
+
 <!--<button (click)="createProblem()">Create Problem</button>-->
 <router-outlet></router-outlet>
