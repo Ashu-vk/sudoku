@@ -27,9 +27,8 @@ jobs:
           git config --global user.email "github-actions@github.com"
       - name: Deploy to GitHub Pages
         run: npx angular-cli-ghpages \
-          --dir=dist/ \
-          --branch=gh-pages \
-          --repo=https://github.com/Ashu-vk/sudoku.git
+          --dir=dist/sudoku \
+          --branch=gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #  uses: peaceiris/actions-gh-pages@v4
