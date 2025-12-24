@@ -22,7 +22,12 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration production --base-href /sudoku/
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=dist/sudoku --branch=gh-pages
+        run: npx angular-cli-ghpages \
+          --dir=dist/sudoku \
+          --branch=gh-pages \
+          --repo=https://github.com/Ashu-vk/sudoku.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #  uses: peaceiris/actions-gh-pages@v4
         #with:
          # github_token: ${{ secrets.GITHUB_TOKEN }}
