@@ -1,2 +1,2 @@
   <input  [ngModel]="val.value"
-   (keydown)="setValue($event)" [disabled] ="!val.isEditable"/>
+   (beforeinput)="setValue($event)" [disabled] ="!val.isEditable"/>
