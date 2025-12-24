@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  gridSize: 9,
+  boxSize: 3
 };
