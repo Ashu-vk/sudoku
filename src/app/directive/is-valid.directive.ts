@@ -1,30 +1,29 @@
-import { Directive } from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, Renderer2} from '@angular/core';
 import {BoxObject} from "../domain/box-object";
 import {environment} from "../../environments/environment";
+import {UtilService} from "../services/util.service";
 
 @Directive({
   selector: '[appIsValid]'
 })
-export class IsValidDirective {
+export class IsValidDirective{
 
-  constructor() { }
+  @Input() public grid!: any[][];
+  @Input() public rowIndex!: any;
+  @Input() public colIndex!: any;
+  @Input() public value!: any;
+  constructor(private el: ElementRef,
+              private renderer:Renderer2,
+              private utils: UtilService) {}
 
-  public isValid(grid:BoxObject[][], rowIndex: number, colIndex: number, num: number|undefined): boolean {
-    for (let i = 0; i < environment.gridSize; i++) {
-      if ((grid[i][colIndex].value === num && i!==rowIndex) || (grid[rowIndex][i].value=== num&& i !==colIndex)) {
-        return false;
-      }
+  @HostListener("beforeinput")
+  public validate() {
+    if (this.utils.isValid(this.grid, this.rowIndex, this.colIndex, this.value.value)) {
+      this.renderer.setStyle(this.el.nativeElement, "border", "1px solid green")
+    } else {
+      this.renderer.setStyle(this.el.nativeElement, "border", "3px solid red")
     }
-    let rowOffset = Math.floor(rowIndex/environment.boxSize)*environment.boxSize;
-    let colOffset = Math.floor(colIndex/environment.boxSize)*environment.boxSize;
-    for (let i = 0; i < environment.boxSize; i++) {
-      for (let j = 0; j < environment.boxSize; j++) {
-        if (grid[i + rowOffset][j + colOffset].value == num  && rowOffset+i!==rowIndex&& colOffset+j!=colIndex) {
-          return false;
-        }
-      }
-    }
-    return true;
   }
+
 
 }

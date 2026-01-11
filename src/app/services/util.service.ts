@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 })
 export class UtilService {
   constructor() { }
-  public  isValid(grid:BoxObject[][], rowIndex: number, colIndex: number, num: number|undefined): boolean {
+  public isValid(grid:BoxObject[][], rowIndex: number, colIndex: number, num: number|undefined): boolean {
       for (let i = 0; i < environment.gridSize; i++) {
         if ((grid[i][colIndex].value === num && i!==rowIndex) || (grid[rowIndex][i].value=== num&& i !==colIndex)) {
           return false;

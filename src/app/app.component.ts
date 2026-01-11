@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, InjectionToken} from '@angular/core';
 import {BoxObject} from './domain/box-object';
 import {environment} from "../environments/environment";
 import {UtilService} from "./services/util.service";
@@ -80,7 +80,7 @@ export class AppComponent {
     for (let num = 1; num <= environment.gridSize; num++) {
       if (this.utilService.isValid(this.sudoku, rowIndex, colIndex, num)) {
         this.sudoku[rowIndex][colIndex] = new BoxObject(num, true);
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 0));
         if (await this.solveProblem(rowIndex, colIndex + 1)) {
           return true;
         }
@@ -89,6 +89,5 @@ export class AppComponent {
     }
     return false;
   }
-
 
 }

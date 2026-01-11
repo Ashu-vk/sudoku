@@ -1,8 +1,7 @@
 <div *ngIf="gridIndex && grid" class="box3">
   <ng-container *ngFor="let i of [0,1,2]">
     <ng-container *ngFor="let j of [0,1,2]">
-      <app-input-div [(value)]="grid[gridIndex[0]+i][gridIndex[1]+j]"
-                     (valueChange)="validate(gridIndex[0]+i, gridIndex[1]+j, grid[gridIndex[0]+i][gridIndex[1]+j].value)">
+      <app-input-div [(value)]="grid[gridIndex[0]+i][gridIndex[1]+j]" appIsValid [grid] = grid [colIndex]= gridIndex[1]+j [rowIndex]=gridIndex[0]+i>
       </app-input-div>
     </ng-container>
   </ng-container>

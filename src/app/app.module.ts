@@ -7,15 +7,15 @@ import { GridComponent } from './components/grid/grid.component';
 import { InputDivComponent } from './components/input-div/input-div.component';
 import {FormsModule} from "@angular/forms";
 import { ViewNumberPipe } from './pipe/view-number.pipe';
-// import { IsValidDirective } from './directive/is-valid.directive';
+import { IsValidDirective } from './directive/is-valid.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     GridComponent,
     InputDivComponent,
-    ViewNumberPipe
-    // IsValidDirective,
+    ViewNumberPipe,
+    IsValidDirective
   ],
   imports: [
     BrowserModule,
